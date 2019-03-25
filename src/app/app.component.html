@@ -1,5 +1,17 @@
-<div class="tree-container">
+<!-- <div class="tree-container">
     <h3>Angular Tree-View</h3>
     <hr>
-    <tree-root [nodes]="nodes" [options]="options"></tree-root>
-</div>
+    <tree-root [nodes]="nodeList" [options]="options"></tree-root>
+</div> -->
+<h1>Angular 2 Recursive List</h1>
+<ul>
+  <ng-template #recursiveList let-treeViewData>
+    <li *ngFor="let item of treeViewData">
+      {{item.ModuleName}}
+      <ul *ngIf="item.Modules.length > 0">
+        <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.Modules }"></ng-container>
+      </ul>
+    </li>
+  </ng-template>
+  <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: treeViewData }"></ng-container>
+</ul>
